@@ -34,7 +34,7 @@ exports.getToken = functions.https.onCall(async (data, context) => {
 
     id = data.userId;
     var res;
-    await admin.database().ref('users/').child(id).child('deviceToken').on('value', async function (snapshot) {
+    await admin.database().ref('users/').child(id).child('deviceToken').once('value', async function (snapshot) {
         res = await snapshot.val();
 
     }, function (errorObject) {
@@ -49,7 +49,7 @@ exports.getKey = functions.https.onCall(async (data, context) => {
 
     var res;
 
-    await admin.database().ref('users/').child(userId).child('key').on('value', async function (snapshot) {
+    await admin.database().ref('users/').child(userId).child('key').once('value', async function (snapshot) {
         res = await snapshot.val();
 
 
@@ -67,7 +67,7 @@ exports.CheckOtpStatus = functions.https.onCall(async (data, context) => {
 
 
     var res;
-    await admin.database().ref('users/').child(userId).child('OtpStatus').on('value', async function (snapshot) {
+    await admin.database().ref('users/').child(userId).child('OtpStatus').once('value', async function (snapshot) {
         res = await snapshot.val();
 
 
